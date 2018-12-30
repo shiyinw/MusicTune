@@ -21,6 +21,8 @@ def prepare_generator_batch(samples, start_letter=0, gpu=False):
     inp[:, 0] = start_letter
     inp[:, 1:] = target[:, :seq_len-1]
 
+    # inp = start_letter + target
+
     inp = Variable(inp).type(torch.LongTensor)
     target = Variable(target).type(torch.LongTensor)
 
@@ -45,6 +47,7 @@ def prepare_discriminator_data(pos_samples, neg_samples, gpu=False):
     """
 
     inp = torch.cat((pos_samples, neg_samples), 0).type(torch.LongTensor)
+
     target = torch.ones(pos_samples.size()[0] + neg_samples.size()[0])
     target[pos_samples.size()[0]:] = 0
 
