@@ -7,6 +7,8 @@ import pdb
 import math
 import torch.nn.init as init
 
+MAX_SEQ_LEN = 30 # 3000
+
 
 class Generator(nn.Module):
 
@@ -20,13 +22,18 @@ class Generator(nn.Module):
 
         self.embeddings = nn.Embedding(vocab_size, embedding_dim)
         self.gru = nn.GRU(embedding_dim, hidden_dim)
+
+        # weight_init.orthogonal(self.gru.weight_ih_l0)
+        # weight_init.orthogonal(self.gru.weight_hh_l0)
+        # use zero init for GRU layer0 bias
+
         self.gru2out = nn.Linear(hidden_dim, vocab_size)
 
         # initialise oracle network with N(0,1)
         # otherwise variance of initialisation is very small => high NLL for data sampled from the same model
         if oracle_init:
             for p in self.parameters():
-                init.normal(p, 0, 1)
+                init.normal_(p, 0, 1)
 
     def init_hidden(self, batch_size=1):
         h = autograd.Variable(torch.zeros(1, batch_size, self.hidden_dim))

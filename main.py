@@ -15,22 +15,17 @@ import helpers
 
 CUDA = False
 VOCAB_SIZE = 5000
-MAX_SEQ_LEN = 30 # 3000
+MAX_SEQ_LEN = 300 # 3000
 START_LETTER = 0
 BATCH_SIZE = 32 # 32
-MLE_TRAIN_EPOCHS = 2 # 100
+MLE_TRAIN_EPOCHS = 5 # 100
 ADV_TRAIN_EPOCHS = 5 # 50
-POS_NEG_SAMPLES = 100 # number of samples
+POS_NEG_SAMPLES = 2700 # number of samples
 
 GEN_EMBEDDING_DIM = 32
 GEN_HIDDEN_DIM = 32
 DIS_EMBEDDING_DIM = 64
 DIS_HIDDEN_DIM = 64
-
-oracle_samples_path = './oracle_samples.trc'
-oracle_state_dict_path = './oracle_EMBDIM32_HIDDENDIM32_VOCAB5000_MAXSEQLEN20.trc'
-pretrained_gen_path = './gen_MLEtrain_EMBDIM32_HIDDENDIM32_VOCAB5000_MAXSEQLEN20.trc'
-pretrained_dis_path = './dis_pretrain_EMBDIM_64_HIDDENDIM64_VOCAB5000_MAXSEQLEN20.trc'
 
 
 def split_data(batch, bs):
@@ -47,7 +42,7 @@ def train_generator_MLE(gen, gen_opt, oracle, real_data_samples, epochs):
     Max Likelihood Pretraining for the generator
     """
     for epoch in range(epochs):
-        print('epoch %d : ' % (epoch + 1), end='')
+        print('epoch %d/%d : ' % (epoch + 1, epochs), end='')
         sys.stdout.flush()
         total_loss = 0
 
@@ -110,6 +105,7 @@ def train_discriminator(discriminator, dis_opt, real_data_samples, generator, or
 
 
     # generating a small validation set before training (using oracle and generator)
+
     pos_val = oracle.sample(100)
     neg_val = generator.sample(100)
     val_inp, val_target = helpers.prepare_discriminator_data(pos_val, neg_val, gpu=CUDA)
@@ -159,7 +155,7 @@ if __name__ == '__main__':
     gen = generator.Generator(GEN_EMBEDDING_DIM, GEN_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=CUDA)
     dis = discriminator.Discriminator(DIS_EMBEDDING_DIM, DIS_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=CUDA)
 
-    with open("./pitch_data/0.pickle", "rb") as f:
+    with open("./data.pickle", "rb") as f:
         samples = pickle.load(f)
 
     if CUDA:
@@ -202,3 +198,6 @@ if __name__ == '__main__':
         # TRAIN DISCRIMINATOR
         print('\nAdversarial Training Discriminator : ')
         train_discriminator(dis, dis_optimizer, pos_samples, gen, oracle, 5, 3)
+
+    torch.save(dis.state_dict(), "dis.model")
+    torch.save(gen.state_dict(), "gen.model")
