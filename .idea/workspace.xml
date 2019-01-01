@@ -2,13 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2797ef72-3c38-4384-8aa2-c7e5b01aa95c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/prediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/create_dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dis.model" beforeDir="false" afterPath="$PROJECT_DIR$/dis.model" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/discriminator.py" beforeDir="false" afterPath="$PROJECT_DIR$/discriminator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen.model" beforeDir="false" afterPath="$PROJECT_DIR$/gen.model" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_curve.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/0.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/0.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/1.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/1.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/10.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/10.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/11.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/11.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/12.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/12.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/13.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/13.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/14.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/14.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/15.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/15.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/16.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/16.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/17.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/17.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/18.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/18.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/19.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/19.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/2.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/2.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/20.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/20.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/21.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/21.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/22.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/22.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/23.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/23.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/3.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/3.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/31.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/31.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/39.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/39.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/4.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/4.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/47.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/47.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/5.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/5.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/6.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/6.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/7.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/7.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/8.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/8.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pitch_data/9.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/pitch_data/9.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/prediction.py" afterDir="false" />
     </list>
     <ignored path="seqGAN.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,8 +49,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/MusicTune$prediction.coverage" NAME="prediction Coverage Results" MODIFIED="1546248888113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MusicTune$main.coverage" NAME="main Coverage Results" MODIFIED="1546248395968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MusicTune$prediction.coverage" NAME="prediction Coverage Results" MODIFIED="1546308896675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MusicTune$main.coverage" NAME="main Coverage Results" MODIFIED="1546313684402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -38,23 +68,27 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ipynb" value="1" />
-          <entry key="py" value="2" />
+          <entry key="md" value="1" />
+          <entry key="py" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IPNB" value="1" />
-          <entry key="Python" value="2" />
+          <entry key="Markdown" value="1" />
+          <entry key="Python" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4150" />
+          <entry key="md" value="19" />
+          <entry key="py" value="5353" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4150" />
+          <entry key="Markdown" value="19" />
+          <entry key="Python" value="5353" />
         </counts>
       </usages-collector>
     </session>
@@ -67,11 +101,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1985">
-              <caret line="199" column="52" lean-forward="true" selection-start-line="199" selection-start-column="52" selection-end-line="199" selection-end-column="52" />
+            <state relative-caret-position="-2846">
+              <caret line="41" column="49" lean-forward="true" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
-                <marker date="1546248395961" expanded="true" signature="534:955" ph="..." />
+                <marker date="1546321826734" expanded="true" signature="611:958" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="210">
+                <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/create_dataset.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -92,8 +150,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/discriminator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+            <state relative-caret-position="345">
+              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -113,24 +171,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+            <state relative-caret-position="1035">
+              <caret line="69" column="67" lean-forward="true" selection-start-line="69" selection-start-column="67" selection-end-line="69" selection-end-column="67" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
-                <marker date="1546246668724" expanded="true" signature="3640:3646" ph="..." />
+                <marker date="1546320413136" expanded="true" signature="3785:3791" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/prediction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+            <state relative-caret-position="364">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
-                <marker date="1546248868824" expanded="true" signature="973:1139" ph="..." />
+                <marker date="1546308896669" expanded="true" signature="975:1141" ph="..." />
               </folding>
             </state>
           </provider>
@@ -157,11 +215,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/../dlenv/lib/python2.7/site-packages/torch/nn/init.py" />
-        <option value="$PROJECT_DIR$/generator.py" />
-        <option value="$PROJECT_DIR$/discriminator.py" />
         <option value="$PROJECT_DIR$/helpers.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/prediction.py" />
+        <option value="$PROJECT_DIR$/discriminator.py" />
+        <option value="$PROJECT_DIR$/create_dataset.py" />
+        <option value="$PROJECT_DIR$/generator.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -230,7 +290,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.prediction">
+  <component name="RunManager" selected="Python.main">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -300,8 +360,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.prediction" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.prediction" />
       </list>
     </recent_temporary>
   </component>
@@ -322,19 +382,19 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19456366" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19456366" />
       <window_info id="Structure" order="1" weight="0.2494043" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32962668" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26626506" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26626506" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.3989071" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32891566" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.329235" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.27951807" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.47108433" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
@@ -424,46 +484,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/prediction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1985">
-          <caret line="199" column="52" lean-forward="true" selection-start-line="199" selection-start-column="52" selection-end-line="199" selection-end-column="52" />
+        <state relative-caret-position="364">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-            <marker date="1546248395961" expanded="true" signature="534:955" ph="..." />
+            <marker date="1546308896669" expanded="true" signature="975:1141" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/discriminator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+        <state relative-caret-position="345">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/create_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+        <state relative-caret-position="1035">
+          <caret line="69" column="67" lean-forward="true" selection-start-line="69" selection-start-column="67" selection-end-line="69" selection-end-column="67" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-            <marker date="1546246668724" expanded="true" signature="3640:3646" ph="..." />
+            <marker date="1546320413136" expanded="true" signature="3785:3791" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prediction.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+        <state relative-caret-position="-2846">
+          <caret line="41" column="49" lean-forward="true" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-            <marker date="1546248868824" expanded="true" signature="973:1139" ph="..." />
+            <marker date="1546321826734" expanded="true" signature="611:958" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="210">
+            <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

@@ -11,29 +11,36 @@ import torch.nn as nn
 import generator
 import discriminator
 import helpers
+import time
+
+import random
+
 
 
 CUDA = False
-VOCAB_SIZE = 5000
-MAX_SEQ_LEN = 300 # 3000
+VOCAB_SIZE = 1000 # pitch frequency
+MAX_SEQ_LEN = 3000
 START_LETTER = 0
 BATCH_SIZE = 32 # 32
-MLE_TRAIN_EPOCHS = 5 # 100
-ADV_TRAIN_EPOCHS = 5 # 50
-POS_NEG_SAMPLES = 2700 # number of samples
+MLE_TRAIN_EPOCHS = 100 # 100
+ADV_TRAIN_EPOCHS = 200 # 50
+POS_NEG_SAMPLES = 34008 # number of samples
+
+# total number 34008
 
 GEN_EMBEDDING_DIM = 32
-GEN_HIDDEN_DIM = 32
+GEN_HIDDEN_DIM = 100
 DIS_EMBEDDING_DIM = 64
 DIS_HIDDEN_DIM = 64
 
+log = []
 
 def split_data(batch, bs):
     inp = torch.autograd.Variable(torch.zeros(bs, MAX_SEQ_LEN)).type(torch.LongTensor)
     target = torch.autograd.Variable(torch.zeros(bs, MAX_SEQ_LEN)).type(torch.LongTensor)
     for i in range(min(bs, len(batch))):
-        inp[i, :] = torch.from_numpy(batch[i][0][:min(MAX_SEQ_LEN, len(batch[i][0]))])
-        target[i, :] = torch.from_numpy(batch[i][1][:min(MAX_SEQ_LEN, len(batch[i][1]))])
+        inp[i, :] = torch.from_numpy(batch[i][0])
+        target[i, :] = torch.from_numpy(batch[i][1])
     return inp, target
 
 
@@ -46,9 +53,9 @@ def train_generator_MLE(gen, gen_opt, oracle, real_data_samples, epochs):
         sys.stdout.flush()
         total_loss = 0
 
-        for i in range(0, POS_NEG_SAMPLES, BATCH_SIZE):
+        for i in range(POS_NEG_SAMPLES):
 
-            batch = real_data_samples[i:i+BATCH_SIZE]
+            batch = random.sample(real_data_samples, BATCH_SIZE)
             inp, target = split_data(batch, BATCH_SIZE)
 
             gen_opt.zero_grad()
@@ -70,7 +77,9 @@ def train_generator_MLE(gen, gen_opt, oracle, real_data_samples, epochs):
         oracle_loss = helpers.batchwise_oracle_nll(gen, oracle, POS_NEG_SAMPLES, BATCH_SIZE, MAX_SEQ_LEN,
                                                    start_letter=START_LETTER, gpu=CUDA)
 
-        print(' average_train_NLL = %.4f, oracle_sample_NLL = %.4f' % (total_loss, oracle_loss))
+        msg = ' average_train_NLL = %.4f, oracle_sample_NLL = %.4f' % (total_loss, oracle_loss)
+        log.append(msg)
+        print(msg)
 
 
 def train_generator_PG(gen, gen_opt, oracle, dis, num_batches):
@@ -93,7 +102,9 @@ def train_generator_PG(gen, gen_opt, oracle, dis, num_batches):
     oracle_loss = helpers.batchwise_oracle_nll(gen, oracle, POS_NEG_SAMPLES, BATCH_SIZE, MAX_SEQ_LEN,
                                                    start_letter=START_LETTER, gpu=CUDA)
 
-    print(' oracle_sample_NLL = %.4f' % oracle_loss)
+    msg = ' oracle_sample_NLL = %.4f' % oracle_loss
+    log.append(msg)
+    print(msg)
 
 
 def train_discriminator(discriminator, dis_opt, real_data_samples, generator, oracle, d_steps, epochs):
@@ -114,7 +125,10 @@ def train_discriminator(discriminator, dis_opt, real_data_samples, generator, or
         s = helpers.batchwise_sample(generator, POS_NEG_SAMPLES, BATCH_SIZE)
         dis_inp, dis_target = helpers.prepare_discriminator_data(real_data_samples, s, gpu=CUDA)
         for epoch in range(epochs):
-            print('d-step %d epoch %d : ' % (d_step + 1, epoch + 1), end='')
+            msg = 'd-step %d/%d epoch %d/%d : ' % (d_step + 1, d_steps, epoch + 1, epochs)
+            log.append(msg)
+            print(msg)
+
             sys.stdout.flush()
             total_loss = 0
             total_acc = 0
@@ -141,8 +155,12 @@ def train_discriminator(discriminator, dis_opt, real_data_samples, generator, or
             total_acc /= float(2 * POS_NEG_SAMPLES)
 
             val_pred = discriminator.batchClassify(val_inp)
-            print(' average_loss = %.4f, train_acc = %.4f, val_acc = %.4f' % (
-                total_loss, total_acc, torch.sum((val_pred>0.5)==(val_target>0.5)).data.item()/200.))
+            msg = ' average_loss = %.4f, train_acc = %.4f, val_acc = %.4f' % (
+                total_loss, total_acc, torch.sum((val_pred>0.5)==(val_target>0.5)).data.item()/200.)
+
+            log.append(msg)
+            print(msg)
+
 
 # MAIN
 if __name__ == '__main__':
@@ -158,16 +176,35 @@ if __name__ == '__main__':
     with open("./data.pickle", "rb") as f:
         samples = pickle.load(f)
 
+    param = {"cuda": CUDA, "vocal_size": VOCAB_SIZE, "max_seq_len": MAX_SEQ_LEN, "start_letter": START_LETTER,
+             "batch_size": BATCH_SIZE, "mle_train_epochs": MLE_TRAIN_EPOCHS,
+             "adv_train_epochs": ADV_TRAIN_EPOCHS, "pos_neg_samples": POS_NEG_SAMPLES,
+             "gen_embedding_dim": GEN_EMBEDDING_DIM, "gen_hidden_dim": GEN_EMBEDDING_DIM,
+             "dis_embedding_dim": DIS_EMBEDDING_DIM, "dis_hidden_dim": DIS_HIDDEN_DIM}
+
+    with open(str(time.time()) + "_dis.config", "w") as f:
+        f.write("\n".join(log))
+        for k in param.keys():
+            f.write(k)
+            f.write(str(param[k]))
+            f.write('\n')
+
+    pos_samples, neg_samples = split_data(samples, len(samples))
+
     if CUDA:
         oracle = oracle.cuda()
         gen = gen.cuda()
         dis = dis.cuda()
-        samples = samples.cuda()
+        pos_samples = pos_samples.cuda()
+        neg_samples = neg_samples.cuda()
 
-    pos_samples, neg_samples = split_data(samples, len(samples))
+
 
     # GENERATOR MLE TRAINING
-    print('Starting Generator MLE Training...')
+    msg = 'Starting Generator MLE Training...'
+    log.append(msg)
+    print(msg)
+
     gen_optimizer = optim.Adam(gen.parameters(), lr=1e-2)
     train_generator_MLE(gen, gen_optimizer, oracle, samples, MLE_TRAIN_EPOCHS)
 
@@ -175,7 +212,10 @@ if __name__ == '__main__':
     # gen.load_state_dict(torch.load(pretrained_gen_path))
 
     # PRETRAIN DISCRIMINATOR
-    print('\nStarting Discriminator Training...')
+    msg = '\nStarting Discriminator Training...'
+    log.append(msg)
+    print(msg)
+
     dis_optimizer = optim.Adagrad(dis.parameters())
     train_discriminator(dis, dis_optimizer, pos_samples, gen, oracle, 2, 3)  # 50, 3
 
@@ -183,21 +223,40 @@ if __name__ == '__main__':
     # dis.load_state_dict(torch.load(pretrained_dis_path))
 
     # ADVERSARIAL TRAINING
-    print('\nStarting Adversarial Training...')
+    msg = '\nStarting Adversarial Training...'
+    log.append(msg)
+    print(msg)
+
     oracle_loss = helpers.batchwise_oracle_nll(gen, oracle, POS_NEG_SAMPLES, BATCH_SIZE, MAX_SEQ_LEN,
                                                start_letter=START_LETTER, gpu=CUDA)
-    print('\nInitial Oracle Sample Loss : %.4f' % oracle_loss)
+    msg = '\nInitial Oracle Sample Loss : %.4f' % oracle_loss
+    log.append(msg)
+    print(msg)
 
     for epoch in range(ADV_TRAIN_EPOCHS):
-        print('\n--------\nEPOCH %d\n--------' % (epoch+1))
+        msg = '\n--------\nEPOCH %d\n--------' % (epoch+1)
+        log.append(msg)
+        print(msg)
+
         # TRAIN GENERATOR
-        print('\nAdversarial Training Generator : ', end='')
+        msg = '\nAdversarial Training Generator : '
+        log.append(msg)
+        print(msg)
+
         sys.stdout.flush()
-        train_generator_PG(gen, gen_optimizer, oracle, dis, 1)
+        train_generator_PG(gen, gen_optimizer, oracle, dis, 5)
 
         # TRAIN DISCRIMINATOR
-        print('\nAdversarial Training Discriminator : ')
+        msg = '\nAdversarial Training Discriminator : '
+        log.append(msg)
+        print(msg)
+
         train_discriminator(dis, dis_optimizer, pos_samples, gen, oracle, 5, 3)
 
-    torch.save(dis.state_dict(), "dis.model")
-    torch.save(gen.state_dict(), "gen.model")
+    torch.save(dis.state_dict(), str(time.time())+"_dis.model")
+    torch.save(gen.state_dict(), str(time.time())+"_gen.model")
+
+
+
+
+

@@ -7,8 +7,6 @@ import pdb
 import math
 import torch.nn.init as init
 
-MAX_SEQ_LEN = 30 # 3000
-
 
 class Generator(nn.Module):
 
@@ -48,6 +46,9 @@ class Generator(nn.Module):
         Embeds input and applies GRU one token at a time (seq_len = 1)
         """
         # input dim                                             # batch_size
+        if self.gpu:
+            inp = inp.cuda()
+            hidden = hidden.cuda()
         emb = self.embeddings(inp)                              # batch_size x embedding_dim
         emb = emb.view(1, -1, self.embedding_dim)               # 1 x batch_size x embedding_dim
         out, hidden = self.gru(emb, hidden)                     # 1 x batch_size x hidden_dim (out)
@@ -92,6 +93,9 @@ class Generator(nn.Module):
             inp should be target with <s> (start letter) prepended
         """
 
+        if self.gpu:
+            target = target.cuda()
+            inp = inp.cuda()
         loss_fn = nn.NLLLoss()
         batch_size, seq_len = inp.size()
         inp = inp.permute(1, 0)           # seq_len x batch_size

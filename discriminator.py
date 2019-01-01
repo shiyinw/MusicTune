@@ -1,7 +1,6 @@
 import torch
 import torch.autograd as autograd
 import torch.nn as nn
-import pdb
 
 class Discriminator(nn.Module):
 
@@ -28,6 +27,8 @@ class Discriminator(nn.Module):
 
     def forward(self, input, hidden):
         # input dim                                                # batch_size x seq_len
+        if self.gpu:
+            input = input.cuda()
         emb = self.embeddings(input)                               # batch_size x seq_len x embedding_dim
         emb = emb.permute(1, 0, 2)                                 # seq_len x batch_size x embedding_dim
         _, hidden = self.gru(emb, hidden)                          # 4 x batch_size x hidden_dim

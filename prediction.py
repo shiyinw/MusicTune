@@ -13,8 +13,8 @@ import discriminator
 import helpers
 
 CUDA = False
-VOCAB_SIZE = 5000
-MAX_SEQ_LEN = 30 # 3000
+VOCAB_SIZE = 1000
+MAX_SEQ_LEN = 3000 # 3000
 START_LETTER = 0
 BATCH_SIZE = 32 # 32
 MLE_TRAIN_EPOCHS = 2 # 100
@@ -49,7 +49,12 @@ if __name__ == "__main__":
     gen = generator.Generator(GEN_EMBEDDING_DIM, GEN_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=CUDA)
     dis = discriminator.Discriminator(DIS_EMBEDDING_DIM, DIS_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=CUDA)
 
-    gen.load_state_dict(torch.load("gen.model"))
+    gpu_gen = generator.Generator(GEN_EMBEDDING_DIM, GEN_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=True)
+    params = torch.load("gen.model", map_location="cpu")
+    #gpu_gen.load_state_dict(torch.load("gen.model"))
+    gen.load_state_dict(params)
+    print(gen)
+    #gen.load_state_dict(torch.load("gen.model"))
 
     with open("./pitch_data/0.pickle", "rb") as f:
         samples = pickle.load(f)
@@ -70,4 +75,5 @@ if __name__ == "__main__":
 
     print(predict.size())
     values, indices = torch.max(predict, 0)
+
     print(indices)
