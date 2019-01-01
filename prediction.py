@@ -13,17 +13,19 @@ import discriminator
 import helpers
 
 CUDA = False
-VOCAB_SIZE = 1000
-MAX_SEQ_LEN = 3000 # 3000
+VOCAB_SIZE = 1000 # pitch frequency
+MAX_SEQ_LEN = 3000
 START_LETTER = 0
 BATCH_SIZE = 32 # 32
-MLE_TRAIN_EPOCHS = 2 # 100
-ADV_TRAIN_EPOCHS = 5 # 50
-POS_NEG_SAMPLES = 100 # number of samples
+MLE_TRAIN_EPOCHS = 20 # 100
+ADV_TRAIN_EPOCHS = 30 # 50
+POS_NEG_SAMPLES = 320 # number of samples
 
-GEN_EMBEDDING_DIM = 32
-GEN_HIDDEN_DIM = 32
-DIS_EMBEDDING_DIM = 64
+# total number 34008
+
+GEN_EMBEDDING_DIM = 10
+GEN_HIDDEN_DIM = 100
+DIS_EMBEDDING_DIM = 10
 DIS_HIDDEN_DIM = 64
 
 
@@ -50,7 +52,7 @@ if __name__ == "__main__":
     dis = discriminator.Discriminator(DIS_EMBEDDING_DIM, DIS_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=CUDA)
 
     gpu_gen = generator.Generator(GEN_EMBEDDING_DIM, GEN_HIDDEN_DIM, VOCAB_SIZE, MAX_SEQ_LEN, gpu=True)
-    params = torch.load("gen.model", map_location="cpu")
+    params = torch.load("pretrained_gen.model", map_location="cpu")
     #gpu_gen.load_state_dict(torch.load("gen.model"))
     gen.load_state_dict(params)
     print(gen)

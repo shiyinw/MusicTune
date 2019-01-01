@@ -2,9 +2,6 @@ import torch
 import torch.autograd as autograd
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
-import pdb
-import math
 import torch.nn.init as init
 
 
@@ -131,7 +128,6 @@ class Generator(nn.Module):
         loss = 0
         for i in range(seq_len):
             out, h = self.forward(inp[i], h)
-            # TODO: should h be detached from graph (.detach())?
             for j in range(batch_size):
                 loss += -out[j][target.data[i][j]]*reward[j]     # log(P(y_t|Y_1:Y_{t-1})) * Q
 
